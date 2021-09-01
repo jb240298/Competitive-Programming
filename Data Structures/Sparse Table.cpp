@@ -28,12 +28,3 @@ struct sparse_table {
         return f(t[h][l], t[h][r - (1 << h) + 1]);
     }
 };
-
-int main() {
-    vector<int> a = {1, 9, 8, -1, 6, -8, 2, 6};
-    sparse_table st(a.begin(), a.end(), [](int x, int y) {
-        return min(x, y);
-    });
-
-    cout << st.query(0, 7) << endl;
-}
