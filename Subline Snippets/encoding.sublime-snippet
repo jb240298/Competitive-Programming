@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+
+int encode(int i, int j, int rows, int cols) {
+	return i * cols + j;
+}
+ 
+pair<int, int> decode(int x, int rows, int cols) {
+	return {x / cols, x % cols};
+}
+
+]]></content>
+</snippet>
