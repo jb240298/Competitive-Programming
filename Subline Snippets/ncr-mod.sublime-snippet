@@ -1,0 +1,44 @@
+<snippet>
+	<content><![CDATA[
+
+const int N = 2e5 + 1;
+int fac[N];
+int invFac[N];
+ 
+int binExpo(int base, int expo) {
+	if (expo == 0) return 1;
+	int tmp = binExpo(base, expo / 2);
+	tmp *= tmp; tmp %= MOD;
+	if (expo % 2) {
+		tmp *= base;
+		tmp %= MOD;
+	}
+	return tmp;
+}
+ 
+int modInv(int d) {
+	// 1/d = d^(-1) = d^(MOD-2) where MOD is prime number.
+	return binExpo(d, MOD - 2);
+}
+ 
+void setFactorials() {
+	fac[0] = 1;
+	for (int i = 1; i < N; i++) {
+		fac[i] = (fac[i - 1] * i) % MOD;
+	}
+	// invFac[n] = 1/n! = (n+1)/(n! * (n+1)) = (n+1)/(n+1)!
+	invFac[N - 1] = modInv(fac[N - 1]);
+	for (int i = N - 2; i > 0; i--) {
+		invFac[i] = ((i + 1) * invFac[i + 1]) % MOD;
+	}
+	invFac[0] = 1;
+}
+ 
+int nCr(int n, int r) {
+	return ((((fac[n] * invFac[n - r]) % MOD) * invFac[r]) % MOD);
+}
+
+]]></content>
+  <tabTrigger>zzgcd_function</tabTrigger>
+  <source>source.cpp</source>
+</snippet>
